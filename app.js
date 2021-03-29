@@ -5,6 +5,8 @@ const Register = require("./models/registerdata");
 
 const path = require("path");
 const hbs = require("hbs");
+const bcrypt = require("bcryptjs");
+const { Console } = require("console");
 const port = process.env.PORT || 3000;
 
 const stactic_path = path.join(__dirname, "public");
@@ -32,6 +34,11 @@ app.get("/register", (req,res) =>{
     res.render("register");
 });
 
+//login hbs
+app.get("/login", (req,res) =>{
+    res.render("login");
+});
+
 //fetching data from user
 app.post("/register", async (req,res) =>{
     try {
@@ -45,6 +52,9 @@ app.post("/register", async (req,res) =>{
               password :password,
               cpassword :cpassword
           }) 
+
+        
+
           const registerd = await donar.save();
 
         }else{
@@ -57,6 +67,29 @@ app.post("/register", async (req,res) =>{
     }
   
 });
+
+
+app.post("/login", async(req,res) =>{
+try {
+    const email = req.body.email;
+    const password = req.body.password;
+     const useremail = await Register.findOne({email:email})
+     const ismatch = await bcrypt.compare(password,useremail.password);
+     
+
+     if(ismatch){
+         res.status(201).render("index");
+     }else{
+         res.send("Invalid Login Details");
+     }
+
+     console.log(useremail);
+} catch (error) {
+    res.status(400).send("Invalid Login Details");
+    
+}
+
+})
 
 
 app.listen(port,()=>{
