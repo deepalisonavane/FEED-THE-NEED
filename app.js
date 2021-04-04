@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 require("./db/conn");
 const Register = require("./models/registerdata");
+const Donation = require("./models/donations");
+
 
 const path = require("path");
 const hbs = require("hbs");
 const bcrypt = require("bcryptjs");
-const { Console } = require("console");
 const port = process.env.PORT || 3000;
 
 const stactic_path = path.join(__dirname, "public");
@@ -53,14 +54,12 @@ app.post("/register", async (req,res) =>{
               cpassword :cpassword
           }) 
 
-        
-
           const registerd = await donar.save();
-
+         
         }else{
             res.send("password are not matching");
         }
-        res.status(201).render("index");
+        res.status(201).render("donor");
 
     } catch (error) {
        res.status(400).send(error);
@@ -74,19 +73,39 @@ try {
     const email = req.body.email;
     const password = req.body.password;
      const useremail = await Register.findOne({email:email})
-     const ismatch = await bcrypt.compare(password,useremail.password);
+     const ismatch = await bcrypt.compare(password, useremail.password);
      
-
      if(ismatch){
-         res.status(201).render("index");
+         res.status(201).render("donor");
      }else{
-         res.send("Invalid Login Details");
+         res.send("Invalid Login");
      }
 
-     console.log(useremail);
 } catch (error) {
-    res.status(400).send("Invalid Login Details");
-    
+    res.status(400).send("Invalid Login Details");  
+}
+})
+
+//fetching data from fooddetails
+
+app.post("/donor", async(req,res) =>{
+try {
+
+    const food = new Donation({
+        fooditems :req.body.fooditems,
+        quantity : req.body.quantity,
+        email : req.body.email,
+        contactno : req.body.contactno,
+        meetingpoint : req.body.meetingpoint,
+        expirydate : req.body.expirydate,
+        foodtype : req.body.foodtype
+    })
+
+      const donationrec = await food.save();
+      res.status(201).render("index");
+
+} catch (error) {
+  res.status(400).send("error");  
 }
 
 })
@@ -95,4 +114,3 @@ try {
 app.listen(port,()=>{
     console.log(`listening to port ${port}`);
 })
-
