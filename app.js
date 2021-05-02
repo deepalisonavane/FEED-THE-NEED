@@ -53,15 +53,6 @@ app.get("/", (req,res) =>{
 
 //volunteer hbs
 
-// app.get("/volunteer",async (req,res) =>{
-//     res.render("volunteer")
-//    let user = await Donation.find();   
-// // console.log(user);
-//  res.status(200).render('/volunteer', { user }, (err)=>{
-//     res.send(user);
-//  });
-// });
-
 app.get('/volunteer', async function(req, res) {
   const data = await Donation.find()
   await res.render("volunteer", {donations: data});
@@ -157,15 +148,6 @@ try {
 }
 
 })
-// app.post("/volunteer", async(req,res) =>{
-// const fs = require("fs");
-// fs.readFile("),(err,data)=>{
-// if(err)return console.error(err);
-// res.end(data.toString());
-
-// }
-
-// });
 
 
 app.listen(port,()=>{
