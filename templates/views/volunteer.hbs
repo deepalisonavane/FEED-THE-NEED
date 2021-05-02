@@ -1,0 +1,47 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/app.js"></script>
+</head>
+<body>
+{{#each donations}}
+    <div>
+        <h1>donar name: {{donar}}</h1>
+        <h1>contact no: {{contactno}}</h1>
+        <h1>meeting point: {{meetingpoint}}</h1>
+        <h1>food item:{{fooditems}}</h1>
+        <h1>food type: {{foodtype}}</h1>
+        <h1>quantity:{{quantity}}</h1>
+        <button href={{contactno}}>call me </button>
+    </div>
+{{/each}}
+
+{{!--   
+   {{# each contents }}
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>{{ this.fooditems }}</h3>
+                <br>
+                <small> {{ this.meetingpoint}} </small>
+                <br>
+                
+            </div>
+        </div>
+{{/each}}
+   
+  
+<h4>{{userr}}yiii </h4>
+      --}}
+
+
+    <h1>Hii</h1>
+
+</body>
+</html>

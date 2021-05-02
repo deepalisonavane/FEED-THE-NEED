@@ -1,6 +1,11 @@
 const express = require("express");
 const app = express();
+const request = require("request");
 require("./db/conn");
+var router = express.Router();
+var Router = require('router')
+var expressHbs = require('express-handlebars');
+
 const Register = require("./models/registerdata");
 const Donation = require("./models/donations");
 
@@ -8,6 +13,9 @@ const Donation = require("./models/donations");
 const path = require("path");
 const hbs = require("hbs");
 const bcrypt = require("bcryptjs");
+const { fstat } = require("fs");
+const { response } = require("express");
+const { URLSearchParams } = require("url");
 const port = process.env.PORT || 3000;
 
 const stactic_path = path.join(__dirname, "public");
@@ -19,14 +27,50 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 app.use(express.static(stactic_path));
+
 app.set("view engine", "hbs");
 app.set("views",template_path);
 hbs.registerPartials(partial_path);
+
+// hbs.handlebars.registerHelper('',async function(userr){
+//     try {
+//         let userr =  await Donation.find();   
+//         Promise.resolve(userr);
+//     } catch (error) {
+//         res.send(err)
+        
+//     }
+// }
+//     );
+
+
 
 
 //main index hbs
 app.get("/", (req,res) =>{
     res.render("index");
+});
+
+//volunteer hbs
+
+// app.get("/volunteer",async (req,res) =>{
+//     res.render("volunteer")
+//    let user = await Donation.find();   
+// // console.log(user);
+//  res.status(200).render('/volunteer', { user }, (err)=>{
+//     res.send(user);
+//  });
+// });
+
+app.get('/volunteer', async function(req, res) {
+  const data = await Donation.find()
+  await res.render("volunteer", {donations: data});
+});
+
+//donor hbs
+app.get("/donor", (req,res) =>{
+    res.render("donor");
+    
 });
 
 
@@ -40,6 +84,7 @@ app.get("/login", (req,res) =>{
     res.render("login");
 });
 
+
 //fetching data from user
 app.post("/register", async (req,res) =>{
     try {
@@ -52,7 +97,7 @@ app.post("/register", async (req,res) =>{
               phoneno : req.body.phoneno,
               password :password,
               cpassword :cpassword
-          }) 
+          })
 
           const registerd = await donar.save();
          
@@ -86,19 +131,22 @@ try {
 }
 })
 
+
 //fetching data from fooddetails
 
 app.post("/donor", async(req,res) =>{
 try {
 
     const food = new Donation({
+        donar :req.body.donar,
         fooditems :req.body.fooditems,
         quantity : req.body.quantity,
         email : req.body.email,
         contactno : req.body.contactno,
         meetingpoint : req.body.meetingpoint,
         expirydate : req.body.expirydate,
-        foodtype : req.body.foodtype
+        foodtype : req.body.foodtype,
+        results : req.body.results
     })
 
       const donationrec = await food.save();
@@ -109,6 +157,15 @@ try {
 }
 
 })
+// app.post("/volunteer", async(req,res) =>{
+// const fs = require("fs");
+// fs.readFile("),(err,data)=>{
+// if(err)return console.error(err);
+// res.end(data.toString());
+
+// }
+
+// });
 
 
 app.listen(port,()=>{

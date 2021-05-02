@@ -1,7 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+    
 <center>
 <form action="/donor" method="POST">
 <div>Food Details</div><br>
 <div>
+    <div>
+        Doner Name:
+        </div>
+        <div>
+            <input type="text" name="donar" placeholder="donar" required>
+    </div>
     <div>
         Food Items
         </div>
@@ -32,16 +51,70 @@
     </div>
    <div>Food Type</div>
     <div>
-       Non Veg <input type="radio" name="foodtype" required>
-       Veg <input type="radio" name="foodtype" required>
+        <input type="radio" name="foodtype" value="Non veg" required>Non Veg</input>
+        <input type="radio" name="foodtype" value="Veg" required>Veg</input>
    </div>
  
     <br>
-    <div>
-      <input type="submit" name="submit" value="Submit">
-    </div> 
+    
 
 </div>
-</form>
 
-</center>
+<div class="modal-dialog">
+
+        <!-- Modal content-->
+        <!-- <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Capture Image</h>
+            </div> -->
+            <div class="modal-body">
+                <style>
+                    #my_camera{
+                        width: 320px;
+                        height: 240px;
+                        border: 1px solid black;
+                    }
+                </style>
+
+                <div id="my_camera"></div>
+                <input type=button value="Take Snapshot" onClick="take_snapshot()" name="snapshot">
+
+                <div id="results" name="results" ></div>
+                
+
+                <!-- Webcam.min.js -->
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+                <!-- Configure a few settings and attach camera -->
+                <script language="JavaScript">
+                    Webcam.set({
+                        width: 320,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90
+                    });
+                    Webcam.attach('#my_camera');
+
+// <!-- Code to handle taking the snapshot and displaying it locally -->
+                    function take_snapshot() {
+
+                        // take snapshot and get image data
+                        Webcam.snap(function (data_uri) {
+                            // display results in page
+                            document.getElementById('results').innerHTML =
+                                    '<img src="' + data_uri + '"/>';
+                        });
+                    }
+                </script>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<div>
+      <input type="submit" name="submit" value="Submit">
+    </div> 
+</body>
+</html>
