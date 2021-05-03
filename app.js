@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const request = require("request");
+
 require("./db/conn");
-var router = express.Router();
-var Router = require('router')
-var expressHbs = require('express-handlebars');
+
+
+
 
 const Register = require("./models/registerdata");
 const Donation = require("./models/donations");
