@@ -14,7 +14,7 @@ const foodSchema = new mongoose.Schema({
                 contentType :String
             }
         
-        
+    
     })
 
 

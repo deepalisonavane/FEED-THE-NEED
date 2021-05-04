@@ -5,7 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+<style>
+                    #my_camera{
+                        width: 320px;
+                        height: 240px;
+                        border: 1px solid black;
+                    }
+                </style>
 
 </head>
 
@@ -16,7 +22,7 @@
 <div>Food Details</div><br>
 <div>
     <div>
-        Doner Name:
+        Donar Name:
         </div>
         <div>
             <input type="text" name="donar" placeholder="donar" required>
@@ -62,14 +68,7 @@
 <div class="modal-dialog">
 
             <div class="modal-body">
-                <style>
-                    #my_camera{
-                        width: 320px;
-                        height: 240px;
-                        border: 1px solid black;
-                    }
-                </style>
-
+        
                 <div id="my_camera"></div>
                 <input type=button value="Take Snapshot" onClick="take_snapshot()" name="snapshot">
 

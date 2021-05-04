@@ -1,30 +1,49 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const donarSchema = new mongoose.Schema({
     firstname:{
         type:String,
-        required:true
+    
     },
     email:{
         type:String,
-        required:true,
         unique:true
     },
     phoneno:{
         type:Number,
         unique:true,
-        required:true
     },
     password:{
         type:String,
-        required:true
     },
     cpassword :{
         type:String,
-        required:true
-    }
-});
+    },
+    tokens:[{
+        token:{
+            type:String,
+            required:true
+        }
+    }]
+})
+
+//Generating Tokens
+donarSchema.methods.generateToken = async function(){
+try {
+    console.log(this._id)
+    const token = jwt.sign({_id:this._id.toString()}, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({token:token});
+    await this.save();
+    return token;
+} catch (error) {
+    res.send(err);
+    console.log("error");
+}
+
+};
+
  //hash for password security
  
 donarSchema.pre("save", async function(next) {
@@ -32,21 +51,10 @@ donarSchema.pre("save", async function(next) {
  console.log(`password ${this.password}`);
  this.password = await bcrypt.hash(this.password,10);
  console.log(`password ${this.password}`);
-this.cpassword = undefined;
+this.cpassword = await bcrypt.hash(this.password,10);
     }
  
 });
-
-// const foodSchema = new mongoose.Schema({
-
-//         fooditems :String,
-//         quantity : String,
-//         email :String,
-//         contactno :Number,
-//         meetingpoint : String,
-//         expirydate :Date,
-        
-//     })
 
 
 //collections
