@@ -8,25 +8,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/app.js"></script>
+    <head>
+    
+
+    
 </head>
+ 
+
 <body>
 {{#each donations}}
     <div>
         <h1>Donar name: {{donar}}</h1>
-        <h1>Contact no: {{contactno}}</h1>
-        <h1>Meeting point: {{meetingpoint}}</h1>
         <h1>Food item:{{fooditems}}</h1>
+         <h1>Quantity:{{quantity}}</h1>
+        <h1>Meeting point: {{meetingpoint}}</h1>
         <h1>Food type: {{foodtype}}</h1>
-        <h1>Quantity:{{quantity}}</h1>
-        <button href={{contactno}}>call me </button>
+        <h1>Contact no: {{contactno}}</h1>
+       <button>
+        <a href="tel:{{contactno}}">Call Donor </a>
+          </button>
+          <button id="btn" onclick="myfunc">I will deliver</button>
     </div>
 {{/each}}
 
 
 
 
-  
 
 </body>
 </html>
