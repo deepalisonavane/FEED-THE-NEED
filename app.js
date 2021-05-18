@@ -4,7 +4,10 @@ const app = express();
 require("./db/conn");
 const Register = require("./models/registerdata");
 const Donation = require("./models/donations");
+const Volunteer = require("./models/volunteeer");
 const auth = require("./middleware/auth");
+
+
 
 const path = require("path");
 const hbs = require("hbs");
@@ -25,6 +28,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:false}));
 
+ 
+
 app.use(express.static(stactic_path));
 
 app.set("view engine", "hbs");
@@ -38,16 +43,23 @@ app.get("/", (req,res) =>{
 
 //volunteer hbs
 
-app.get('/volunteer', auth , async function(req, res) {
+app.get('/volunteer', async function(req, res) {
   const data = await Donation.find()
   await res.render("volunteer", {donations: data});
+  
 });
+
 
 //donor hbs
 app.get("/donor", auth , (req,res) =>{
     //console.log(`this is cookiee ${req.cookies.jwt}`);
     res.render("donor");
     
+});
+
+//vol hbs
+app.get("/vol", (req,res) =>{
+    res.render("vol");
 });
 
 
@@ -154,6 +166,29 @@ try {
 }
 
 })
+
+
+app.post("/vol", async(req,res) =>{
+    try {
+    
+        const vol = new Volunteer({
+            volname :req.body.volname,
+            volemail : req.body.volemail,
+            volno : req.body.volno,
+            voladd : req.body.voladd,
+            volveh : req.body.volveh
+        })
+    
+          const volrec = await vol.save();
+          const data = await Donation.find()
+
+          await res.render("volunteer", {donations: data});
+    
+    } catch (error) {
+      res.status(400).send("error");  
+    }
+    
+    })
 
 
 app.listen(port,()=>{
