@@ -1,4 +1,6 @@
 <center>
+    <a href="/vollogin">Already Register??</a><br><br>
+
 <form action="/vol" method="POST">
 <div>Volunteer Details</div><br>
 <div>
@@ -12,13 +14,13 @@
         Email :
         </div>
         <div>
-            <input type="email" name="volemail" placeholder="Name" required>
+            <input type="email" name="volemail" placeholder="Email" required>
     </div>
     <div>
         Contact No:
         </div>
         <div>
-            <input type="number" name="volno" placeholder="Name" required>
+            <input type="number" name="volno" placeholder="Contact No" required>
     </div>
     <div>
         Adress:
@@ -26,13 +28,26 @@
         <div>
       <textarea name="voladd" placeholder="Address"></textarea>  
         </div>
+        <div>
+        Password:
+        </div>
+        
+        <div>
+        <input type="password" name="volpassword" placeholder="Password"  required>
+    </div>
+    <div>
+        Confirm Password:
+        </div>
+    <div>
+        <input type="password" name="volcpassword" placeholder="Confirm Password" required>
+    </div>
     <div>
         Vehical mode:
         </div>
         <div>
-            <input type="radio" name="volveh" value="Two wheeler" required>Two Wheeler<br>
-            <input type="radio" name="volveh" value="Four Wheeler" required>Four Wheeler<br>
-            <input type="radio" name="volveh" value="Others" required>Others
+            <input type="radio" name="volveh" value="Two wheeler" required>Two Wheeler</input><br>
+            <input type="radio" name="volveh" value="Four Wheeler" required>Four Wheeler</input><br>
+            <input type="radio" name="volveh" value="Others" required>Others</input>
 
     </div>
     <div>

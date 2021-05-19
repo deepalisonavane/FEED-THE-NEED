@@ -53,7 +53,7 @@ app.get('/volunteer', async function(req, res) {
 //donor hbs
 app.get("/donor", auth , (req,res) =>{
     //console.log(`this is cookiee ${req.cookies.jwt}`);
-    res.render("donor");
+    res.render("register");
     
 });
 
@@ -68,9 +68,14 @@ app.get("/register", (req,res) =>{
     res.render("register");
 });
 
-//login hbs
+//donor login hbs
 app.get("/login", (req,res) =>{
     res.render("login");
+});
+
+//volunteer login hbs
+app.get("/vollogin", (req,res) =>{
+    res.render("vollogin");
 });
 
 
@@ -89,7 +94,7 @@ app.post("/register", async (req,res) =>{
           })
         
          
-        
+    
         const token =  await donard.generateToken();
         console.log(token);
          
@@ -141,6 +146,9 @@ try {
 })
 
 
+
+
+
 //fetching data from fooddetails
 
 app.post("/donor", async(req,res) =>{
@@ -170,24 +178,73 @@ try {
 
 app.post("/vol", async(req,res) =>{
     try {
+        const volpassword = req.body.volpassword;
+        const volcpassword = req.body.volcpassword;
+        if(volpassword === volcpassword){
     
         const vol = new Volunteer({
             volname :req.body.volname,
             volemail : req.body.volemail,
             volno : req.body.volno,
             voladd : req.body.voladd,
+            volpassword : req.body.volpassword,
+            volcpassword : req.body.volcpassword,
             volveh : req.body.volveh
-        })
-    
-          const volrec = await vol.save();
-          const data = await Donation.find()
 
+        })
+        const token =  await vol.generateToken();
+        console.log(` this is tokenn ${token}`);
+         
+        res.cookie("jwt", token),{
+            // expires:new Date(Date.now()+60000),
+
+            httponly:true
+        };
+        const volun = await vol.save();
+         console.log(volun);
+        }else{
+            res.send("password are not matching");
+        }
+
+           const data = await Donation.find()
+     
           await res.render("volunteer", {donations: data});
-    
+         
+
     } catch (error) {
-      res.status(400).send("error");  
+      res.status(400).send("error yess");  
     }
     
+    });
+
+    //login for volunteer
+app.post("/vollogin", async(req,res) =>{
+    try {
+        const volemail = req.body.volemail;
+        const volpassword = req.body.volpassword;
+         const voluseremail = await Volunteer.findOne({volemail:volemail});
+         
+         const ismatch = await bcrypt.compare(volpassword, voluseremail.volpassword);
+         const token =  await voluseremail.generateToken();
+            console.log(token);
+    
+            res.cookie("jwt", token),{
+                //expires:new Date(Date.now()+60000),
+                httponly:true
+            };
+         
+         if(ismatch){
+            const data = await Donation.find()
+     
+            await res.render("volunteer", {donations: data});
+           
+         }else{
+             res.send("Invalid Login");
+         }
+    
+    } catch (error) {
+        res.status(400).send("Invalid Login Details");  
+    }
     })
 
 
