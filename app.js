@@ -51,7 +51,7 @@ app.get('/volunteer', async function(req, res) {
 
 
 //donor hbs
-app.get("/donor", auth , (req,res) =>{
+app.get("/donor",  (req,res) =>{
     //console.log(`this is cookiee ${req.cookies.jwt}`);
     res.render("register");
     

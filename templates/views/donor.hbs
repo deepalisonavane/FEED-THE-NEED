@@ -106,7 +106,20 @@
     </div>
 </div>
 <div>
-      <input type="submit" name="submit" value="Submit">
+      <input type="submit" name="submit" value="Submit" id='btClickMe' 
+            onclick='save(); this.disabled = true;'>
     </div> 
+
+
+    
+
+        <script>
+    function save() {
+        var msg = document.getElementById('msg');
+        msg.innerHTML = 'Data submitted and the button disabled &#9786;';
+
+    }
+</script>
+    
 </body>
 </html>

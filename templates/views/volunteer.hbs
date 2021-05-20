@@ -10,8 +10,18 @@
        <button>
         <a href="tel:{{contactno}}">Call Donor </a>
           </button>
-          <button>I will deliver</button>
+          <button onclick="function()" id="idOfButton">I will deliver</button>
     </div>
+
+
+<script>
+document.getElementById("idOfButton").onclick = function() {
+    //disable
+    this.disabled = true;
+    
+    //do some validation stuff
+}
+
+</script>
+
 {{/each}}
-
-

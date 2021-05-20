@@ -55,7 +55,7 @@ volunteerSchema.pre("save", async function(next) {
     if(this.isModified("volpassword")){
  console.log(`volpassword ${this.volpassword}`);
  this.volpassword = await bcrypt.hash(this.volpassword,10);
- console.log(`password ${this.volpassword}`);
+ console.log(`volpassword ${this.volpassword}`);
 this.volcpassword = await bcrypt.hash(this.volpassword,10);
     }
  
