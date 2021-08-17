@@ -40,6 +40,9 @@ hbs.registerPartials(partial_path);
 app.get("/", (req,res) =>{
     res.render("index");
 });
+app.get("/feedback", (req,res) =>{
+    res.render("feedback");
+});
 
 //volunteer hbs
 
