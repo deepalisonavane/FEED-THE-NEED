@@ -10,16 +10,18 @@
        <button>
         <a href="tel:{{contactno}}">Call Donor </a>
           </button>
-          <button onclick="function()" id="idOfButton">I will deliver</button>
+          <button onclick="function()" id="idOfButton">I will Pickup</button>
     </div>
 
 
 <script>
-document.getElementById("idOfButton").onclick = function() {
-    //disable
-    this.disabled = true;
+    function fun(){
+document.getElementById("idOfButton").disabled= true;
+
+    }
+
     
-    //do some validation stuff
+    
 }
 
 </script>
