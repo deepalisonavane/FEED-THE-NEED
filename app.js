@@ -5,6 +5,7 @@ require("./db/conn");
 const Register = require("./models/registerdata");
 const Donation = require("./models/donations");
 const Volunteer = require("./models/volunteeer");
+const Feedback =require("./models/feedback");
 const auth = require("./middleware/auth");
 
 
@@ -41,6 +42,9 @@ app.get("/", (req,res) =>{
     res.render("index");
 });
 
+app.get("/feedback", (req,res) =>{
+    res.render("feedback");
+});
 
 //volunteer hbs
 
@@ -248,7 +252,26 @@ app.post("/vollogin", async(req,res) =>{
     }
     })
 
-
+    app.post("/feedback", async(req,res) =>{
+        try {
+        
+            const feed = new Feedback({
+                firstname  :req.body.firstname,
+                con :req.body.con,
+                email : req.body.email,
+                
+                feedback : req.body.feedback,
+               
+            })
+        
+              const donationrec = await food.save();
+              res.status(201).render("index");
+        
+        } catch (error) {
+          res.status(400).send("error");  
+        }
+        
+        })
 app.listen(port,()=>{
     console.log(`listening to port ${port}`);
 })
