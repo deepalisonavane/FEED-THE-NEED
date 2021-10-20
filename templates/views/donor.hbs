@@ -83,7 +83,8 @@ color:ghostwhite;
 border-radius: 20px;
 border: none;
 background-color: #ad45a8;
-} --}}
+}
+
 
 </style>
 
@@ -92,9 +93,7 @@ background-color: #ad45a8;
 <body>
      {{>navbar}}
 
-     {{!-- Donating food actually helps serve two purposes for bettering communities, though one is less obvious than the other. ... The less unspoiled food that gets thrown away, the less unspoiled food that is sent to a landfill where it ultimately goes to waste.
- <h3>volunteer:“Volunteering is at the very core of being a human.  No one has made it through life without someone else’s help.”</h3> --}}
-
+    
  
 <center>
 <form action="/donor" method="POST" class="login-box" >
@@ -131,7 +130,7 @@ background-color: #ad45a8;
     
 </div>
 
-{{!-- <div class="modal-dialog">
+ {{!-- <div class="modal-dialog">
 
             <div class="modal-body">
         
@@ -163,13 +162,13 @@ background-color: #ad45a8;
                         });
                     }
                 </script>
-            </div>
+            </div> --}}
             
         </div>
 
     </div>
 </div>
-<div>
+{{!-- <div>
       <input type="submit" name="submit" value="Submit" id='btClickMe' 
             onclick='save(); this.disabled = true;'>
     </div> 
@@ -181,9 +180,9 @@ background-color: #ad45a8;
     function save() {
         var msg = document.getElementById('msg');
         msg.innerHTML = 'Data submitted and the button disabled &#9786;';
-    } --}}
-{{!-- </script> --}}
-<div>
+    
+
+<div> --}}
    <center><a href="#">
            <span></span>
            <span></span>
@@ -191,12 +190,17 @@ background-color: #ad45a8;
            <span></span>
          
    
-        <button type="submit" name="submit" value="Submit">submit</button> 
+        <button type="submit" onclick="" name="submit" value="Submit" >submit</button> 
   </a>
   </div>
-    <div>
-      {{!-- <input type="submit" name="submit" value="Submit" id='btClickMe' > --}}
-           
-    </div> 
+    
+    <script>
+
+ function fun(){
+window.location("/instruction");
+
+ }
+
+    </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/donordata",{
+mongoose.connect("mongodb://localhost:27017/feedtheneed",{
 useCreateIndex:true,
 useNewUrlParser:true,
 useUnifiedTopology:true

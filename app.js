@@ -42,10 +42,14 @@ app.get("/", (req,res) =>{
     res.render("index");
 });
 
+//feedback hbs
 app.get("/feedback", (req,res) =>{
     res.render("feedback");
 });
-
+//instructions hbs
+app.get("/instruction", (req,res) =>{
+    res.render("instruction");
+});
 //volunteer hbs
 
 app.get('/volunteer', async function(req, res) {
@@ -82,6 +86,7 @@ app.get("/login", (req,res) =>{
 app.get("/vollogin", (req,res) =>{
     res.render("vollogin");
 });
+
 
 
 //fetching data from user
@@ -172,7 +177,7 @@ try {
     })
 
       const donationrec = await food.save();
-      res.status(201).render("index");
+      res.status(201).render("instruction");
 
 } catch (error) {
   res.status(400).send("error");  
