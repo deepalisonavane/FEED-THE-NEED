@@ -32,6 +32,10 @@ button{
   border: none;
   
 }
+a{
+  color: white;
+  border: none;
+}
 p{
   color: white;
 }
@@ -46,32 +50,21 @@ h1{
     {{>navbar}}
  <h1 >Feed People,<br>Not Landfill.</h1>
 
-  <button onclick="func()">
-   Donate
+  <button >
+  
+  <a href="/donor">Donate</a>
 
   </button>
 
 
-
-  <script>
-        function func() {
-       window.location.assign("/donor")
-}  
-function function(){
-window.location('/vol')
-
-}
-</script>
    <footer>
 <h1>We are on Mission to slove Hunger join the cause</h1>
-<button>Volunteer</button>
+<button>
+  <a href="/donor">Volunteer</a></button>
 
 
 </footer>
    
 </body>
-
-
-
 
 </html>
